@@ -43,9 +43,11 @@ The software package supports Github Action cloud compilation, and the compiled 
 3. Enter the phicomm_n1 directory and run `sudo ./make -d` to complete the compilation. The generated openwrt firmware supporting Phicomm N1 is in the `out` directory under the root directory.
 
 ## Detailed make compile command
-- `sudo ./make -d`: Compile all kernel versions of openwrt with the default configuration. This command is recommended.
+- `sudo ./make -u 5.4.73_5.9.2`: Specify multiple cores, use "_" to connect. This command is recommended.
+- `sudo ./make -u 5.4.73_5.9.2 -s 1024`: Specify multiple cores, and set the partition size to 1024m.
+- `sudo ./make -d`: Compile all kernel versions of openwrt with the default configuration.
 - `sudo ./make -d -k latest`: Use the default configuration to compile the latest kernel version of the openwrt firmware.
-- `sudo ./make -d -s 512 -k 5.7.15`: Use the default configuration and set the partition size to 512m, and only compile the openwrt firmware with the kernel version 5.7.15.
+- `sudo ./make -d -s 1024 -k 5.7.15`: Use the default configuration and set the partition size to 1024m, and only compile the openwrt firmware with the kernel version 5.7.15.
 - `sudo ./make -h`: Display help information and view detailed description of each parameter.
 - `sudo ./make`: If you are familiar with the relevant setting requirements of the phicomm_n1 firmware, you can follow the prompts, such as selecting the firmware you want to make, the kernel version, setting the ROOTFS partition size, etc. If you don’t know these settings, just press Enter.
 
@@ -65,7 +67,7 @@ The software package supports Github Action cloud compilation, and the compiled 
 | diy-part2.sh | After updating and installing feeds, you can write the instructions for modifying the source code into the script, such as modifying the default IP, host name, theme, adding/removing software packages, etc. |
 | make | Phicomm N1 OpenWrt firmware build script. |
 | armbian | Multi-version kernel file directory. |
-| build-n1-kernel | Use the kernel file shared by Flippy to build this script to build the Armbian kernel of OpenWrt for Phicomm-N1. |
+| build_kernel | Use the kernel file shared by Flippy to build this script to build the Armbian kernel of OpenWrt for Phicomm-N1. |
 | install-program | Script to flash firmware to emmc. |
 
 
@@ -86,6 +88,7 @@ The software package supports Github Action cloud compilation, and the compiled 
 | UPLOAD_WERANSFER | Upload the firmware to WeTransfer.com. Default failure |
 | RECENT_LASTEST | maximum retention days for release, artifacts and logs in GitHub Release and Actions. |
 | TZ | Time zone setting |
+| GITHUB_REPOSITORY | Github.com Environment variables. The owner and repository name. For example, ophub/op. |
 | secrets.GITHUB_TOKEN | 1. Personal center: Settings → Developer settings → Personal access tokens → Generate new token ( Name: GITHUB_TOKEN, Select: public_repo, Copy GITHUB_TOKEN's Value ). 2. Op code center: Settings → Secrets → New secret ( Name: RELEASES_TOKEN, Value: Paste GITHUB_TOKEN's Value ). |
 
 ## Firmware compilation parameters
